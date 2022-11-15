@@ -1,4 +1,4 @@
-# sshtg (linux only)
+# sshtg
 
 ## Usage
 SSGTG is a telegram bot that can edit files in your computer with specific commands.
