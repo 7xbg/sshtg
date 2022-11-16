@@ -1,6 +1,4 @@
-﻿using System.Security.AccessControl;
-using System.Diagnostics;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -74,11 +72,16 @@ Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, 
 
 #endregion
 
-Console.WriteLine($"@{me.Username} is online!");
+Console.WriteLine($"@{me.Username} is online! Type :exit to stop bot");
 await AnnounceMsg("SSH Bot is online!", botClient);
 while(true) {
+    string inp = Console.ReadLine();
+    if(inp == ":exit") {
+        await AnnounceMsg("SSH Bot going offline.", botClient);
+        break;
+    }
+
     if(Data.inSession) {
-        string inp = Console.ReadLine();
         await Processor.SendMessage(inp, Data.Session.chatId, botClient);
     }
 }
